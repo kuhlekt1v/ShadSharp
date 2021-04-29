@@ -104,6 +104,7 @@ namespace CarShopConsoleApp
         private static void printShoppingCart(Store s)
         {
             Console.WriteLine("Cars you have chosen to buy: ");
+
             for (int i = 0; i < s.ShoppingList.Count; i++)
             {
                 Console.WriteLine($"Car # {i} - {s.ShoppingList[i]}");
