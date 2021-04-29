@@ -26,6 +26,8 @@ namespace CarShopConsoleApp
                         string carMake = "";
                         string carModel = "";
                         decimal carPrice = 0;
+                        bool isNew = true;
+                        int miles = 0;
 
                         Console.WriteLine("What is the car make? Ford, Nissan, etc.");
                         carMake = Console.ReadLine();
@@ -34,9 +36,35 @@ namespace CarShopConsoleApp
                         carModel = Console.ReadLine();
 
                         Console.WriteLine("How much does the car cost?");
-                        carPrice = decimal.Parse(Console.ReadLine());
+                        try
+                        {
+                            carPrice = decimal.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Please enter valid integers only.");
+                            carPrice = decimal.Parse(Console.ReadLine());
+                        }
 
-                        Car newCar = new Car(carMake, carModel, carPrice);
+
+                        Console.WriteLine("Is the car new? (y/n)");
+                        string response = Console.ReadLine();
+                        if (response != "y")
+                            isNew = false;
+
+
+                        Console.WriteLine("How many miles are on the car?");
+                        try
+                        {
+                            miles = int.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Please enter valid integers only.");
+                            miles = int.Parse(Console.ReadLine());
+                        }
+
+                        Car newCar = new Car(carMake, carModel, carPrice, isNew, miles);
                         s.CarList.Add(newCar);
 
                         printInventory(s);
@@ -47,11 +75,17 @@ namespace CarShopConsoleApp
                         Console.WriteLine("You chose to add a car to your shopping cart");
                         printInventory(s);
                         Console.WriteLine("Which item would you like to buy? (number)");
-                        int carChosen = int.Parse(Console.ReadLine());
+                        try
+                        {
+                            int carChosen = int.Parse(Console.ReadLine());
+                            s.ShoppingList.Add(s.CarList [carChosen]);
+                            printShoppingCart(s);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Car # not found. Please try again.\n");
+                        }
 
-                        s.ShoppingList.Add(s.CarList [carChosen]);
-
-                        printShoppingCart(s);
                         break;
 
                     // Checkout.
