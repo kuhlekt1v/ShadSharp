@@ -30,6 +30,7 @@ namespace CarShopGUI
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnCreateCar = new System.Windows.Forms.Button();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtModel = new System.Windows.Forms.TextBox();
@@ -45,6 +46,9 @@ namespace CarShopGUI
             this.btnCheckout = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.btnClearInventory = new System.Windows.Forms.Button();
+            this.radioNew = new System.Windows.Forms.RadioButton();
+            this.radioUsed = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -52,6 +56,9 @@ namespace CarShopGUI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioUsed);
+            this.groupBox1.Controls.Add(this.radioNew);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.btnCreateCar);
             this.groupBox1.Controls.Add(this.txtPrice);
             this.groupBox1.Controls.Add(this.txtModel);
@@ -61,14 +68,23 @@ namespace CarShopGUI
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(205, 209);
+            this.groupBox1.Size = new System.Drawing.Size(205, 222);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Create a Car:";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 147);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 15);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Status";
+            // 
             // btnCreateCar
             // 
-            this.btnCreateCar.Location = new System.Drawing.Point(7, 154);
+            this.btnCreateCar.Location = new System.Drawing.Point(7, 183);
             this.btnCreateCar.Name = "btnCreateCar";
             this.btnCreateCar.Size = new System.Drawing.Size(192, 23);
             this.btnCreateCar.TabIndex = 6;
@@ -82,6 +98,7 @@ namespace CarShopGUI
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(149, 23);
             this.txtPrice.TabIndex = 5;
+            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
             // 
             // txtModel
             // 
@@ -129,7 +146,7 @@ namespace CarShopGUI
             this.groupBox2.Controls.Add(this.lstInventory);
             this.groupBox2.Location = new System.Drawing.Point(287, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(224, 413);
+            this.groupBox2.Size = new System.Drawing.Size(224, 353);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Car Inventory";
@@ -140,7 +157,7 @@ namespace CarShopGUI
             this.lstInventory.ItemHeight = 15;
             this.lstInventory.Location = new System.Drawing.Point(6, 34);
             this.lstInventory.Name = "lstInventory";
-            this.lstInventory.Size = new System.Drawing.Size(212, 364);
+            this.lstInventory.Size = new System.Drawing.Size(212, 304);
             this.lstInventory.TabIndex = 0;
             // 
             // btnAddToCart
@@ -174,9 +191,9 @@ namespace CarShopGUI
             // 
             // btnCheckout
             // 
-            this.btnCheckout.Location = new System.Drawing.Point(649, 372);
+            this.btnCheckout.Location = new System.Drawing.Point(632, 372);
             this.btnCheckout.Name = "btnCheckout";
-            this.btnCheckout.Size = new System.Drawing.Size(200, 23);
+            this.btnCheckout.Size = new System.Drawing.Size(217, 23);
             this.btnCheckout.TabIndex = 4;
             this.btnCheckout.Text = "Checkout";
             this.btnCheckout.UseVisualStyleBackColor = true;
@@ -202,11 +219,44 @@ namespace CarShopGUI
             this.lblTotal.TabIndex = 6;
             this.lblTotal.Text = "$0.00";
             // 
+            // btnClearInventory
+            // 
+            this.btnClearInventory.Location = new System.Drawing.Point(287, 371);
+            this.btnClearInventory.Name = "btnClearInventory";
+            this.btnClearInventory.Size = new System.Drawing.Size(224, 23);
+            this.btnClearInventory.TabIndex = 7;
+            this.btnClearInventory.Text = "Clear Inventory";
+            this.btnClearInventory.UseVisualStyleBackColor = true;
+            this.btnClearInventory.Click += new System.EventHandler(this.btnClearInventory_Click);
+            // 
+            // radioNew
+            // 
+            this.radioNew.AutoSize = true;
+            this.radioNew.Location = new System.Drawing.Point(52, 147);
+            this.radioNew.Name = "radioNew";
+            this.radioNew.Size = new System.Drawing.Size(49, 19);
+            this.radioNew.TabIndex = 9;
+            this.radioNew.TabStop = true;
+            this.radioNew.Text = "New";
+            this.radioNew.UseVisualStyleBackColor = true;
+            // 
+            // radioUsed
+            // 
+            this.radioUsed.AutoSize = true;
+            this.radioUsed.Location = new System.Drawing.Point(111, 147);
+            this.radioUsed.Name = "radioUsed";
+            this.radioUsed.Size = new System.Drawing.Size(51, 19);
+            this.radioUsed.TabIndex = 10;
+            this.radioUsed.TabStop = true;
+            this.radioUsed.Text = "Used";
+            this.radioUsed.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(862, 450);
+            this.Controls.Add(this.btnClearInventory);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCheckout);
@@ -244,6 +294,10 @@ namespace CarShopGUI
         private System.Windows.Forms.Button btnCheckout;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnClearInventory;
+        private System.Windows.Forms.RadioButton radioUsed;
+        private System.Windows.Forms.RadioButton radioNew;
     }
 }
 

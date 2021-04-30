@@ -11,6 +11,7 @@ namespace CarClassLibrary
         public string Make { get; set; }
         public string Model { get; set; }
         public decimal Price { get; set; }
+        public bool IsNew { get; set; }
 
 
         public Car()
@@ -18,19 +19,24 @@ namespace CarClassLibrary
             Make = "nothing yet";
             Model = "nothing yet";
             Price = 0.00M;
+            IsNew = true;
 
         }
 
-        public Car(string a, string b, decimal c)
+        public Car(string a, string b, decimal c, bool d)
         {
             Make = a;
             Model = b;
             Price = c;
+            IsNew = d;
         }
 
         override public string ToString()
         {
-            return $"{Make} - {Model} | Price: ${Price}";
+            if (IsNew)
+                return $"{Make} - {Model} | Price: ${Price} (NEW)";
+            else
+                return $"{Make} - {Model} | Price: ${Price} (Used)";
         }
     }
 }
