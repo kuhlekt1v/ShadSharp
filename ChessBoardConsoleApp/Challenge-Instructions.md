@@ -7,22 +7,6 @@ The user is supposed to type in a number between 1 and 8 when asked to place a p
 ## 3. Multiple pieces.
 The program is only designed to work with the knight chess piece. Modify the program so it asks which piece should be placed on the board and then give the correct legal moves for that piece.
 ## 4. Board printing upgrade.
-The program shows only a single character for each board cell. Modify the output to print a board outline like the example shown below.
-<br/>
-+---+---+---+---+---+---+---+---+<br/>
-|   |   |   |   |   |   |   |   |<br/>
-+---+---+---+---+---+---+---+---+<br/>
-|   |   |   |   |   |   |   |   |<br/>
-+---+---+---+---+---+---+---+---+
-|   |   |   |   |   |   |   |   |
-+---+---+---+---+---+---+---+---+
-|   |   |   |   |   |   |   |   |
-+---+---+---+---+---+---+---+---+
-|   |   |   |   |   |   |   |   |
-+---+---+---+---+---+---+---+---+
-|   |   |   |   |   |   |   |   |
-+---+---+---+---+---+---+---+---+
-|   |   |   |   |   |   |   |   |
-+---+---+---+---+---+---+---+---+
-|   |   |   |   |   |   |   |   |
-+---+---+---+---+---+---+---+---+
+The program shows only a single character for each board cell. Modify the output to print a board outline like the example shown:  
+
+![Console App challenege example](challenge-sample-img.png)
