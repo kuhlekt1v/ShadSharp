@@ -1,5 +1,6 @@
 ﻿using ChessBoardLibrary;
 using System;
+using System.Linq;
 
 namespace ChessBoardConsoleApp
 {
@@ -27,14 +28,32 @@ namespace ChessBoardConsoleApp
 
         private static Cell setCurrentCell()
         {
-            // Get X and Y coordinate from user. Return cell location
-            Console.WriteLine("Enter the current row number.");
-            int currentRow = int.Parse(Console.ReadLine());
+            // Valid user inputs.
+            string [] acceptedArray = { "1", "2", "3", "4", "5", "6", "7", "8" };
 
-            Console.WriteLine("Enter the current column number.");
-            int currentColumn = int.Parse(Console.ReadLine());
+            // Row input.
+            Console.WriteLine("Enter a number (1-8) for the current row number.");
+            string currentRow = Console.ReadLine();
 
-            return myBoard.theGrid [currentRow - 1, currentColumn - 1];
+            // If user input for row is not valid.
+            if(!acceptedArray.Contains(currentRow))
+            {
+                Console.WriteLine("Invalid entry please try again.");
+                setCurrentCell();
+            }
+
+            // Column input.
+            Console.WriteLine("Enter a number (1-8) for the current column number.");
+            string currentColumn = Console.ReadLine();
+
+            // If user input for column is not valid.
+            if (!acceptedArray.Contains(currentColumn))
+            {
+                Console.WriteLine("Invalid entry please try again.");
+                setCurrentCell();
+            }
+
+            return myBoard.theGrid [int.Parse(currentRow) - 1, int.Parse(currentColumn) - 1];
 
         }
 
