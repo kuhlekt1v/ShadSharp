@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ChessBoardLibrary
+﻿namespace ChessBoardLibrary
 {
     public class Board
     {
@@ -25,16 +19,23 @@ namespace ChessBoardLibrary
 
             for (int i = 0; i < Size; i++)
             {
-
                 for (int j = 0; j < Size; j++)
                 {
                     theGrid [i, j] = new Cell(i, j);
-
                 }
             }
         }
 
-        public void MarkNextLegalMoves(Cell currentCell, string chessPiece)
+        public bool isSafe(int rowPosition, int colPosition)
+        {
+            if ((rowPosition < 0 || rowPosition > 7) || (colPosition < 0 || colPosition > 7))
+                return false;
+            else
+                return true;
+
+        }
+
+        public void ClearAllPreviousmoves()
         {
             // Step 1 - Clear all previous legal moves.
             for (int i = 0; i < Size; i++)
@@ -46,32 +47,103 @@ namespace ChessBoardLibrary
                     theGrid [i, j].CurrentlyOccupied = false;
                 }
             }
+        }
+
+        public void MarkNextLegalMoves(Cell currentCell, string chessPiece)
+        {
+            ClearAllPreviousmoves();
 
             // Step 2 - Find all legal moves and mark the cells as 'legal'.
             switch (chessPiece)
             {
-                case "Knight":
-                    theGrid [currentCell.RowNumber + 2, currentCell.ColumnNumber + 1].LegalNextMove = true;
-                    theGrid [currentCell.RowNumber + 2, currentCell.ColumnNumber - 1].LegalNextMove = true;
-                    theGrid [currentCell.RowNumber - 2, currentCell.ColumnNumber + 1].LegalNextMove = true;
-                    theGrid [currentCell.RowNumber - 2, currentCell.ColumnNumber - 1].LegalNextMove = true;
-                    theGrid [currentCell.RowNumber + 1, currentCell.ColumnNumber + 2].LegalNextMove = true;
-                    theGrid [currentCell.RowNumber + 1, currentCell.ColumnNumber - 2].LegalNextMove = true;
-                    theGrid [currentCell.RowNumber - 1, currentCell.ColumnNumber + 2].LegalNextMove = true;
-                    theGrid [currentCell.RowNumber - 1, currentCell.ColumnNumber - 2].LegalNextMove = true;
+                // Knight.
+                case "h":
+                    if(isSafe(currentCell.RowNumber + 2, currentCell.ColumnNumber + 1))
+                        theGrid [currentCell.RowNumber + 2, currentCell.ColumnNumber + 1].LegalNextMove = true;
+                    if(isSafe(currentCell.RowNumber + 2, currentCell.ColumnNumber - 1))
+                        theGrid [currentCell.RowNumber + 2, currentCell.ColumnNumber - 1].LegalNextMove = true;
+                    if (isSafe(currentCell.RowNumber - 2, currentCell.ColumnNumber + 1))
+                        theGrid [currentCell.RowNumber - 2, currentCell.ColumnNumber + 1].LegalNextMove = true;
+                    if (isSafe(currentCell.RowNumber - 2, currentCell.ColumnNumber - 1))
+                        theGrid [currentCell.RowNumber - 2, currentCell.ColumnNumber - 1].LegalNextMove = true;
+                    if (isSafe(currentCell.RowNumber + 1, currentCell.ColumnNumber + 2))
+                        theGrid [currentCell.RowNumber + 1, currentCell.ColumnNumber + 2].LegalNextMove = true;
+                    if (isSafe(currentCell.RowNumber + 1, currentCell.ColumnNumber - 2))
+                        theGrid [currentCell.RowNumber + 1, currentCell.ColumnNumber - 2].LegalNextMove = true;
+                    if (isSafe(currentCell.RowNumber - 1, currentCell.ColumnNumber + 2))
+                        theGrid [currentCell.RowNumber - 1, currentCell.ColumnNumber + 2].LegalNextMove = true;
+                    if (isSafe(currentCell.RowNumber - 1, currentCell.ColumnNumber - 2))
+                        theGrid [currentCell.RowNumber - 1, currentCell.ColumnNumber - 2].LegalNextMove = true;
                     break;
-                case "King":
+                // King.
+                case "k":
+                    if (isSafe(currentCell.RowNumber + 1, currentCell.ColumnNumber))
+                        theGrid [currentCell.RowNumber + 1, currentCell.ColumnNumber].LegalNextMove = true;
+                    if (isSafe(currentCell.RowNumber - 1, currentCell.ColumnNumber))
+                        theGrid [currentCell.RowNumber - 1, currentCell.ColumnNumber].LegalNextMove = true;
+                    if (isSafe(currentCell.RowNumber, currentCell.ColumnNumber + 1))
+                        theGrid [currentCell.RowNumber, currentCell.ColumnNumber + 1].LegalNextMove = true;
+                    if (isSafe(currentCell.RowNumber, currentCell.ColumnNumber - 1))
+                        theGrid [currentCell.RowNumber, currentCell.ColumnNumber - 1].LegalNextMove = true;
                     break;
-                case "Rook":
+                // Rook.
+                case "r":
+                    for (int i = 0; i <= 8; i++)
+                    {
+                        if (isSafe(currentCell.RowNumber + i, currentCell.ColumnNumber))
+                            theGrid [currentCell.RowNumber + i, currentCell.ColumnNumber].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber - i, currentCell.ColumnNumber))
+                            theGrid [currentCell.RowNumber - i, currentCell.ColumnNumber].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber, currentCell.ColumnNumber + i))
+                            theGrid [currentCell.RowNumber, currentCell.ColumnNumber + i].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber, currentCell.ColumnNumber - i))
+                            theGrid [currentCell.RowNumber, currentCell.ColumnNumber - i].LegalNextMove = true;
+                    }
                     break;
-                case "Bishop":
+                // Bishop.
+                case "b":
+                    for (int i = 0; i <= 8; i++)
+                    {
+                        if (isSafe(currentCell.RowNumber + i, currentCell.ColumnNumber + i))
+                            theGrid [currentCell.RowNumber + i, currentCell.ColumnNumber + i].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber + i, currentCell.ColumnNumber - i))
+                            theGrid [currentCell.RowNumber + i, currentCell.ColumnNumber - i].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber - i, currentCell.ColumnNumber + i))
+                            theGrid [currentCell.RowNumber - i, currentCell.ColumnNumber + i].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber - i, currentCell.ColumnNumber - i))
+                            theGrid [currentCell.RowNumber - i, currentCell.ColumnNumber - i].LegalNextMove = true;
+                    }
                     break;
-                case "Queen":
+                // Queen.
+                case "q":
+                    for (int i = 0; i <= 8; i++)
+                    {
+                        // Horizontal / vertical moves.
+                        if (isSafe(currentCell.RowNumber + i, currentCell.ColumnNumber))
+                            theGrid [currentCell.RowNumber + i, currentCell.ColumnNumber].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber - i, currentCell.ColumnNumber))
+                            theGrid [currentCell.RowNumber - i, currentCell.ColumnNumber].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber, currentCell.ColumnNumber + i))
+                            theGrid [currentCell.RowNumber, currentCell.ColumnNumber + i].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber, currentCell.ColumnNumber - i))
+                            theGrid [currentCell.RowNumber, currentCell.ColumnNumber - i].LegalNextMove = true;
+
+                        // Diagonal moves.
+                        if (isSafe(currentCell.RowNumber + i, currentCell.ColumnNumber + i))
+                            theGrid [currentCell.RowNumber + i, currentCell.ColumnNumber + i].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber + i, currentCell.ColumnNumber - i))
+                            theGrid [currentCell.RowNumber + i, currentCell.ColumnNumber - i].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber - i, currentCell.ColumnNumber + i))
+                            theGrid [currentCell.RowNumber - i, currentCell.ColumnNumber + i].LegalNextMove = true;
+                        if (isSafe(currentCell.RowNumber - i, currentCell.ColumnNumber - i))
+                            theGrid [currentCell.RowNumber - i, currentCell.ColumnNumber - i].LegalNextMove = true;
+                    }
                     break;
                 default:
                     break;
             }
 
+            // Mark current user position.
             theGrid [currentCell.RowNumber, currentCell.ColumnNumber].CurrentlyOccupied = true;
         }
     }
