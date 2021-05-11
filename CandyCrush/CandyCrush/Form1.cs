@@ -24,8 +24,8 @@ namespace CandyCrush
             lblClicks.Text = clicks.ToString();
 
             // Calculate number of rows and columns based on panel and button size.
-            cols = panel1.Height / MyButton.btnSize;
             rows = panel1.Width / MyButton.btnSize;
+            cols = panel1.Height / MyButton.btnSize;
 
             // New 2D array of buttons.
             btnGrid = new MyButton [rows, cols];
@@ -56,6 +56,7 @@ namespace CandyCrush
             Button btn = (Button)sender;
             currentColor = btn.BackColor;
             pictureBox1.BackColor = currentColor;
+            
         }
 
         private void gridButtonClick(object sender, EventArgs e)
@@ -79,15 +80,9 @@ namespace CandyCrush
             else if (!origColor.Equals(currentColor))
             {
                 floodFill(btn.Row, btn.Col);
-                checkForWinner();
             }
 
-        }
-
-
-        private bool colorIsMatch(int r, int c)
-        {
-            return (btnGrid [r, c].BackColor == currentColor);
+            checkForWinner();
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -95,6 +90,7 @@ namespace CandyCrush
             panel1.Controls.Clear();
             populateGrid();
         }
+
 
         private void floodFill(int r, int c)
         {
@@ -115,7 +111,6 @@ namespace CandyCrush
                 // Apply to the cell to the south.
                 floodFill(r, c-1);
             }
-
         }
 
         private bool isValid(int r, int c)
@@ -123,6 +118,29 @@ namespace CandyCrush
             return (r >= 0 && r < rows && c >= 0 && c < cols);
         }
 
+        public void checkForWinner()
+        {
+            bool complete = false;
+            rows = panel1.Width / MyButton.btnSize;
+            cols = panel1.Height / MyButton.btnSize;
 
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    // If color if current cell != color of previous cell break (return false).
+                    if(isValid(r-1, c-1))
+                        if (btnGrid [r, c].BackColor != btnGrid [r - 1, c - 1].BackColor)
+                            return;
+                        else
+                            complete = true;
+                }
+            }
+
+            // Display winning message if game complete.
+            if (complete)
+                MessageBox.Show("You win!");
+        }
     }
 }
