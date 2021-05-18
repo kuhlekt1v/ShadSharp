@@ -37,8 +37,9 @@ namespace FileIOApp
             this.label3 = new System.Windows.Forms.Label();
             this.btnAddToList = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnReadFromFile = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnDeleteSelected = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -107,16 +108,18 @@ namespace FileIOApp
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save to File";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button1
+            // btnReadFromFile
             // 
-            this.button1.Location = new System.Drawing.Point(88, 328);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Read from File";
-            this.button1.UseMnemonic = false;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnReadFromFile.Location = new System.Drawing.Point(88, 328);
+            this.btnReadFromFile.Name = "btnReadFromFile";
+            this.btnReadFromFile.Size = new System.Drawing.Size(100, 23);
+            this.btnReadFromFile.TabIndex = 7;
+            this.btnReadFromFile.Text = "Read from File";
+            this.btnReadFromFile.UseMnemonic = false;
+            this.btnReadFromFile.UseVisualStyleBackColor = true;
+            this.btnReadFromFile.Click += new System.EventHandler(this.btnReadFromFile_Click);
             // 
             // listBox1
             // 
@@ -127,13 +130,24 @@ namespace FileIOApp
             this.listBox1.Size = new System.Drawing.Size(511, 394);
             this.listBox1.TabIndex = 8;
             // 
+            // btnDeleteSelected
+            // 
+            this.btnDeleteSelected.Location = new System.Drawing.Point(16, 213);
+            this.btnDeleteSelected.Name = "btnDeleteSelected";
+            this.btnDeleteSelected.Size = new System.Drawing.Size(115, 23);
+            this.btnDeleteSelected.TabIndex = 9;
+            this.btnDeleteSelected.Text = "Delete Selected";
+            this.btnDeleteSelected.UseVisualStyleBackColor = true;
+            this.btnDeleteSelected.Click += new System.EventHandler(this.btnDeleteSelected_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnDeleteSelected);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnReadFromFile);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnAddToList);
             this.Controls.Add(this.txtURL);
@@ -159,8 +173,9 @@ namespace FileIOApp
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAddToList;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnReadFromFile;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btnDeleteSelected;
     }
 }
 
