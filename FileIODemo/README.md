@@ -1,6 +1,7 @@
 # FileIO Demo: Challenges
 
-![File IO screen shot](fileio-challenge.jpg)
+![File IO screen shot](fileio-complete.jpg)<br>
+_My completed Windows Form with open/save dialogs._
 
 ## Modify the demo as follows:
 
